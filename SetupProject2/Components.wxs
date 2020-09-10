@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+ 
+  <Fragment>
+    
+    <ComponentGroup Id="ProductComponents" >
+      <ComponentRef Id="TestFile"/>
+    </ComponentGroup>
+  
+  <DirectoryRef Id="INSTALLFOLDER" FileSource="..\ConsoleApp1\bin\Debug\app.publish">
+    <Component Id="TestFile" Guid="{8F881CEF-AEA1-467F-A8AE-CA52020B4269}">
+      <File Id="FileTestFile" Name="ConsoleApp1.exe" KeyPath="yes" />
+      <RemoveFolder Id="RemoveStartMenu" Directory="InstallProgramMenuFolder" On="uninstall"/>
+    </Component>   
+  </DirectoryRef>
+    
+  </Fragment>
+</Wix>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <!--Give product a unique ID per platform-->
+  <?if $(var.Platform)=x64?>
+  <?define ProductCode="{5F45232E-AA07-445D-B9E8-134EC3BA7CF2}"?>
+  <?else?>
+  <?define ProductCode="{8789D95A-1FD8-41C9-8F86-B6E7F651AD38}"?>
+  <?endif?>
+
+  <!--Fixed upgrade Id-->
+  <?define UpgradeCode="{14BA7DD0-A21C-415A-BA02-AE1D949AAC7F}"?>
+  
+  <?define BuildVersion="1.2.3.4"?>
+
+  <!--Define main product-->
+  <Product
+    Id="$(var.ProductCode)"
+    Name="!(loc.ProductName_$(var.Platform))"
+    Language="!(loc.Language)"
+    Version="$(var.BuildVersion)"
+    Manufacturer="!(loc.Company)"
+    UpgradeCode="$(var.UpgradeCode)">
+      
+      <!--Provide package details-->
+      <Package InstallerVersion="200"
+               Compressed="yes"
+               InstallScope="perMachine"
+               Platform="$(var.Platform)"
+               Manufacturer="!(loc.Company)"
+               Description="!(loc.Description)"
+               Keywords="!(loc.Keywords)"
+               Comments="!(loc.Comments)"
+               Languages="!(loc.Language)"
+               />
+    
+      <!--Downgrade error message-->
+      <MajorUpgrade DowngradeErrorMessage= "!(loc.DowngradeErrorMessage)"/>
+
+      <!--Include .cab file into .msi file-->
+      <MediaTemplate EmbedCab="yes"/>
+
+      <!--Define main app icon-->
+      <Icon Id="icon.ico" SourceFile="$(var.ConsoleApp1.ProjectDir)\icon.jpg"/>
+
+      <UIRef Id="WixUI_Minimal"/>
+       <!--Define components, sho-->
+      <Feature Id="ProductFeature" Title="ConsoleApp" Level="1">
+        <ComponentGroupRef Id="ProductComponents" />
+      </Feature>
+
+  </Product>
+
+	
+
+
+</Wix>
